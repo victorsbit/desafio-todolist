@@ -36,13 +36,14 @@ function App() {
 
   return (
     <section className='main-container'>
+      <h1>To Do List</h1>
       <form onSubmit={addTask}>
         <input
           type='text'
           onChange={handleInputChange}
           value={inputValue}
+          placeholder='add your task'
         />
-        <span>{currChange}</span>
         <button
           type='submit'
           disabled={disabled}
@@ -50,6 +51,7 @@ function App() {
           Add task
         </button>
       </form>
+      <span>{currChange}</span>
       <TodoList list={todoList} removeTask={removeTask} />
     </section>
   );

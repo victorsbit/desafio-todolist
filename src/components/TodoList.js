@@ -6,7 +6,7 @@ function TodoList({ list, removeTask }) {
     <ul>
       {list.map((task, index) => (
         <li key={`${task}-${index}`}>
-          {task}
+          {`0${index} - ${task}`}
           <button
             type='button'
             onClick={ () => removeTask(task, index) }

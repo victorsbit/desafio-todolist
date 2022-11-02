@@ -1,6 +1,90 @@
 .main-container {
   align-items: center;
+  background-color: var(--primary);
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  justify-content: center;
   width: 100vw;
+}
+
+.main-container form {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 900px;
+}
+
+.main-container input {
+  border: 1px solid var(--primary2);
+  border: none;
+  appearance: none;
+  background: #F2F2F2;
+  padding: 10px;
+  border-radius: 3px;
+  outline: none;
+  margin: 5px;
+  width: 250px;
+}
+
+.main-container input:focus::placeholder {
+  color: transparent;
+}
+
+.main-container input::placeholder {
+  color: var(--primary2);
+  transition: color 0.3s ease;
+}
+
+.main-container form button {
+  height: 30px;
+  width: 100px;
+}
+
+.main-container form button:enabled {
+  color: var(--primary2);
+}
+
+.main-container span {
+  font-size: 0.9em;
+  font-style: italic;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}
+
+.main-container ul {
+  width: 900px;
+}
+
+.main-container ul li {
+  border: 1px var(--primary2) solid;
+  color: var(--primary2);
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+  padding: 15px;
+  width: 100%;
+}
+
+.main-container ul button {
+  background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: default;
+	outline: inherit;
+}
+
+.main-container ul button:hover {
+  color: red;
+}
+
+.main-container div {
+  width: 100%;
+}
+
+.main-container h1 {
+  color: var(--primary2);
+  font-size: 2.25em;
+  margin: 50px;
 }
