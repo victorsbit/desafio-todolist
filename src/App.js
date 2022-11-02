@@ -7,6 +7,7 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [currChange, setCurrChange] = useState([]);
+  
 
   useEffect(() => {
     if (inputValue.length > 0) {
@@ -21,7 +22,7 @@ function App() {
   const addTask = (e) => {
     e.preventDefault();
 
-    const updatedList = [...todoList, inputValue];
+    const updatedList = [...todoList, {inputValue}];
     setTodoList(updatedList);
     setCurrChange([...currChange, `task "${inputValue}" added to the list`]);
     setInputValue('');
