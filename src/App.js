@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TodoList from './components/TodoList';
+import { v4 as uuid } from 'uuid';
 import './App.css';
 
 function App() {
@@ -21,8 +22,10 @@ function App() {
 
   const addTask = (e) => {
     e.preventDefault();
+    
+    const id = uuid();
+    const updatedList = [...todoList, { id, content: inputValue, status: 'pending' }];
 
-    const updatedList = [...todoList, {inputValue}];
     setTodoList(updatedList);
     setCurrChange([...currChange, `task "${inputValue}" added to the list`]);
     setInputValue('');
@@ -35,16 +38,30 @@ function App() {
     setCurrChange([...currChange, `task "${task}" removed from the list`]);
   }
 
-  const modifyTask = ({ target }, task) => {
-    const { className } = target;
+  const modifyTask = (task) => {
+    let updatedList = [];
 
-    if (className !== 'done') {
-      target.className = 'done';
-      setCurrChange([...currChange, `task "${task}" was marked as finished`]);
-    } else {
-      target.className = '';
-      setCurrChange([...currChange, `task "${task}" was marked as pending`]);
+    if (task.status === 'pending') {
+      updatedList = todoList.map((currTask) => {
+        if (currTask.id === task.id) return { ...task, status: 'done' };
+
+        return currTask;
+      });
+
+      setCurrChange([...currChange, `task "${task.content}" marked as finished`]);
     }
+
+    if (task.status === 'done') {
+      updatedList = todoList.map((currTask) => {
+        if (currTask.id === task.id) return { ...task, status: 'pending' };
+
+        return currTask;
+      });
+
+      setCurrChange([...currChange, `task "${task.content}" marked as pending`]);
+    }
+
+    setTodoList(updatedList);
   }
 
   return (
@@ -65,7 +82,11 @@ function App() {
         </button>
       </form>
       <span>{currChange[currChange.length - 1]}</span>
-      <TodoList list={todoList} removeTask={removeTask} modifyTask={modifyTask} />
+      {
+        todoList.length === 0 ?
+          'No task added' :
+          <TodoList list={todoList} removeTask={removeTask} modifyTask={modifyTask} />
+      }
     </section>
   );
 }

@@ -7,14 +7,15 @@ function TodoList({ list, removeTask, modifyTask }) {
       {list.map((task, index) => (
         <div key={index}>
           <li
-            key={`${task}-${index}`}
-            onClick={ (event) => modifyTask(event, task) }
+            key={`${task.content}-${index}`}
+            className={task.status}
+            onClick={() => modifyTask(task)}
           >
-            { index < 10 ? `0${index} - ${task}` : `${index} - ${task}`}
+            {index < 10 ? `0${index} - ${task.content}` : `${index} - ${task.content}`}
           </li>
           <button
             type='button'
-            onClick={ () => removeTask(task, index) }
+            onClick={() => removeTask(task.content, index)}
           >
             X
           </button>
@@ -25,7 +26,13 @@ function TodoList({ list, removeTask, modifyTask }) {
 }
 
 TodoList.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.string)
+  list: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string,
+    content: PropTypes.string,
+    status: PropTypes.string,
+  })).isRequired,
+  removeTask: PropTypes.func.isRequired,
+  modifyTask: PropTypes.func.isRequired
 };
 
 export default TodoList;
