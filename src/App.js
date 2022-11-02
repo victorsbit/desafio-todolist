@@ -1,24 +1,43 @@
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
+import TodoList from './components/TodoList';
 import './App.css';
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+  const [disabled, setDisabled] = useState(true);
+
+  useEffect(() => {
+    if (inputValue.length > 0) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [inputValue]);
+
+  const addTask = () => {
+    const updatedList = [...todoList, inputValue];
+    setTodoList(updatedList);
+  }
+
+  const handleChange = ({target}) => setInputValue(target.value);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <section className='main-container'>
+      <input
+        type='text'
+        onChange={handleChange}
+        value={inputValue}
+      />
+      <button
+        type='button'
+        onClick={addTask}
+        disabled={disabled}
+      >
+        Add task
+      </button>
+      <TodoList list={todoList} />
+    </section>
   );
 }
 
