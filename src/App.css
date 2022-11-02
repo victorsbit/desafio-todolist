@@ -52,17 +52,23 @@
 }
 
 .main-container ul {
+  border: solid 1px gray;
   width: 900px;
 }
 
 .main-container ul li {
-  border: 1px var(--primary2) solid;
-  color: var(--primary2);
+  border-bottom: 1px var(--primary2) solid;
   display: flex;
   justify-content: space-between;
-  margin: 5px;
   padding: 15px;
-  width: 100%;
+}
+
+.main-container ul li:last-child {
+  border-bottom: none;
+}
+
+.done {
+  text-decoration: line-through;
 }
 
 .main-container ul button {

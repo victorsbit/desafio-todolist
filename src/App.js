@@ -3,9 +3,9 @@ import TodoList from './components/TodoList';
 import './App.css';
 
 function App() {
+  const [disabled, setDisabled] = useState(true);
   const [todoList, setTodoList] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [disabled, setDisabled] = useState(true);
   const [currChange, setCurrChange] = useState('');
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function App() {
 
     const updatedList = [...todoList, inputValue];
     setTodoList(updatedList);
-    setCurrChange(`task "${inputValue}" added in the list`);
+    setCurrChange(`task "${inputValue}" added to the list`);
     setInputValue('');
   }
 
@@ -30,6 +30,16 @@ function App() {
 
     setTodoList(updatedList);
     setCurrChange(`task "${task}" remove from the list`);
+  }
+
+  const modifyTask = ({ target }) => {
+    const { className } = target;
+
+    if (className !== 'done') {
+      target.className = 'done';
+    } else {
+      target.className = '';
+    }
   }
 
   const handleInputChange = ({target}) => setInputValue(target.value);
@@ -52,7 +62,7 @@ function App() {
         </button>
       </form>
       <span>{currChange}</span>
-      <TodoList list={todoList} removeTask={removeTask} />
+      <TodoList list={todoList} removeTask={removeTask} modifyTask={modifyTask} />
     </section>
   );
 }
