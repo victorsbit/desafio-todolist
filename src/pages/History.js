@@ -8,7 +8,7 @@ function History() {
 
   return (
     <main className="history-container">
-      <h1>History os tasks</h1>
+      <h1>History of tasks</h1>
       <Link className="back-home" to="/">Voltar</Link>
       <ul>
         {historyList.map((history, index) => (
