@@ -5,18 +5,20 @@ function TodoList({ list, removeTask, modifyTask }) {
   return (
     <ul>
       {list.map((task, index) => (
-        <li
-          key={`${task}-${index}`}
-          onClick={modifyTask}
-        >
-          {`0${index} - ${task}`}
+        <div key={index}>
+          <li
+            key={`${task}-${index}`}
+            onClick={ (event) => modifyTask(event, task) }
+          >
+            { index < 10 ? `0${index} - ${task}` : `${index} - ${task}`}
+          </li>
           <button
             type='button'
             onClick={ () => removeTask(task, index) }
           >
             X
           </button>
-        </li>
+        </div>
       ))}
     </ul>
   )

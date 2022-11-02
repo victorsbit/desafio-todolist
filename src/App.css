@@ -56,14 +56,21 @@
   width: 900px;
 }
 
+.main-container ul div {
+  border-bottom: solid gray 1px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 .main-container ul li {
-  border-bottom: 1px var(--primary2) solid;
+  cursor: pointer;
   display: flex;
   justify-content: space-between;
   padding: 15px;
 }
 
-.main-container ul li:last-child {
+.main-container ul:last-child {
   border-bottom: none;
 }
 
@@ -79,6 +86,7 @@
 	font: inherit;
 	cursor: default;
 	outline: inherit;
+  margin-right: 15px;
 }
 
 .main-container ul button:hover {

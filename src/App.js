@@ -6,7 +6,7 @@ function App() {
   const [disabled, setDisabled] = useState(true);
   const [todoList, setTodoList] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [currChange, setCurrChange] = useState('');
+  const [currChange, setCurrChange] = useState([]);
 
   useEffect(() => {
     if (inputValue.length > 0) {
@@ -15,13 +15,15 @@ function App() {
       setDisabled(true);
     }
   }, [inputValue]);
+  
+  const handleInputChange = ({target}) => setInputValue(target.value);
 
   const addTask = (e) => {
     e.preventDefault();
 
     const updatedList = [...todoList, inputValue];
     setTodoList(updatedList);
-    setCurrChange(`task "${inputValue}" added to the list`);
+    setCurrChange([...currChange, `task "${inputValue}" added to the list`]);
     setInputValue('');
   }
 
@@ -29,20 +31,20 @@ function App() {
     const updatedList = todoList.filter((_currTask, currIndex) => currIndex !== index);
 
     setTodoList(updatedList);
-    setCurrChange(`task "${task}" remove from the list`);
+    setCurrChange([...currChange, `task "${task}" removed from the list`]);
   }
 
-  const modifyTask = ({ target }) => {
+  const modifyTask = ({ target }, task) => {
     const { className } = target;
 
     if (className !== 'done') {
       target.className = 'done';
+      setCurrChange([...currChange, `task "${task}" was marked as finished`]);
     } else {
       target.className = '';
+      setCurrChange([...currChange, `task "${task}" was marked as pending`]);
     }
   }
-
-  const handleInputChange = ({target}) => setInputValue(target.value);
 
   return (
     <section className='main-container'>
@@ -61,7 +63,7 @@ function App() {
           Add task
         </button>
       </form>
-      <span>{currChange}</span>
+      <span>{currChange[currChange.length - 1]}</span>
       <TodoList list={todoList} removeTask={removeTask} modifyTask={modifyTask} />
     </section>
   );
