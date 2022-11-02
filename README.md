@@ -5,21 +5,20 @@
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
 * Você instalou a versão mais recente de `node`
 
-## 🚀 Instalando <To_Do_List>
+## 🚀 Instalando <To Do List>
 
-Para instalar o <To_Do_List>, siga estas etapas:
+Para instalar o <To Do List>, siga estas etapas:
 
 Linux e macOS:
 ```
 <npm install>
 ```
 
-## ☕ Usando <To_Do_List>
+## ☕ Usando <To Do List>
 
-Para usar <To_Do_List>, siga estas etapas:
+Para usar <To Do List>, siga estas etapas:
 
 ```
 <npm start>
 ```
 
-[⬆ Voltar ao topo](#To_Do_List)<br>
