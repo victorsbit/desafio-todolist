@@ -6,6 +6,7 @@ function App() {
   const [todoList, setTodoList] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const [currChange, setCurrChange] = useState('');
 
   useEffect(() => {
     if (inputValue.length > 0) {
@@ -15,28 +16,41 @@ function App() {
     }
   }, [inputValue]);
 
-  const addTask = () => {
+  const addTask = (e) => {
+    e.preventDefault();
+
     const updatedList = [...todoList, inputValue];
     setTodoList(updatedList);
+    setCurrChange(`task "${inputValue}" added in the list`);
+    setInputValue('');
   }
 
-  const handleChange = ({target}) => setInputValue(target.value);
+  const removeTask = (task, index) => {
+    const updatedList = todoList.filter((_currTask, currIndex) => currIndex !== index);
+
+    setTodoList(updatedList);
+    setCurrChange(`task "${task}" remove from the list`);
+  }
+
+  const handleInputChange = ({target}) => setInputValue(target.value);
 
   return (
     <section className='main-container'>
-      <input
-        type='text'
-        onChange={handleChange}
-        value={inputValue}
-      />
-      <button
-        type='button'
-        onClick={addTask}
-        disabled={disabled}
-      >
-        Add task
-      </button>
-      <TodoList list={todoList} />
+      <form onSubmit={addTask}>
+        <input
+          type='text'
+          onChange={handleInputChange}
+          value={inputValue}
+        />
+        <span>{currChange}</span>
+        <button
+          type='submit'
+          disabled={disabled}
+        >
+          Add task
+        </button>
+      </form>
+      <TodoList list={todoList} removeTask={removeTask} />
     </section>
   );
 }

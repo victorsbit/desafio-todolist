@@ -1,12 +1,18 @@
 import React from "react";
 import PropTypes from 'prop-types';
 
-function TodoList({ list }) {
+function TodoList({ list, removeTask }) {
   return (
     <ul>
       {list.map((task, index) => (
         <li key={`${task}-${index}`}>
           {task}
+          <button
+            type='button'
+            onClick={ () => removeTask(task, index) }
+          >
+            X
+          </button>
         </li>
       ))}
     </ul>
